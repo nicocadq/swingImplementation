@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class Screen extends JFrame {
 
@@ -32,11 +35,23 @@ public class Screen extends JFrame {
 	 */
 	public Screen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 581, 570);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 587, 22);
+		contentPane.add(menuBar);
+		
+		JMenu menu = new JMenu("Menu");
+		menuBar.add(menu);
+		
+		JMenuItem CreateProduct = new JMenuItem("Create New Product");
+		menu.add(CreateProduct);
+		
+		JMenuItem ListProducts = new JMenuItem("List All Products");
+		menu.add(ListProducts);
 	}
-
 }
