@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -15,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Screen extends JFrame {
 
@@ -24,6 +29,11 @@ public class Screen extends JFrame {
 	private JTextField formInputID__textField;
 	private JTextField formInputName__textField;
 	private JTextField formInputDir__textField;
+	private JTable table;
+	
+	
+	
+	
 
 	/**
 	 * Launch the application.
@@ -60,6 +70,8 @@ public class Screen extends JFrame {
 		menuBar.add(menu);
 		
 		JMenuItem createProduct__menuItem = new JMenuItem("Create New Product");
+	
+		
 		menu.add(createProduct__menuItem);
 		
 		JMenuItem listProducts__menuItem = new JMenuItem("List All Products");
@@ -90,7 +102,26 @@ public class Screen extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 5, 424, 381);
 		listProductsTable__panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(
+				(TableModel) new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"ID", "Name", "Direction", "Amount"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					String.class, String.class, String.class, String.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
 		createProduct__panel.setLayout(null);
+		
+		scrollPane.setViewportView(table);
 		
 		JLabel createProduct__label = new JLabel("Create New Product");
 		createProduct__label.setBounds(176, 12, 123, 16);
@@ -143,5 +174,19 @@ public class Screen extends JFrame {
 		JSpinner formInputAmount__spinner = new JSpinner();
 		formInputAmount__spinner.setBounds(223, 202, 43, 26);
 		createProductForm__panel.add(formInputAmount__spinner);
+		
+		
+		
+		createProduct__menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(masterPanel, "CREATE_PRODUCT__PANEL");
+			}
+		});
+		
+		listProducts__menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(masterPanel, "LIST_PRODUCTS__PANEL");
+			}
+		});
 	}
 }
