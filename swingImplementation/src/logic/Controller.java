@@ -16,8 +16,8 @@ public class Controller {
 	}
 	
 	
-	public void saveProduct(int id, String nombre, String direction, int avilableAmount) {
-		this.products.add(new Product(id, nombre, direction, avilableAmount));
+	public void saveProduct(int id, String name, String direction, int avilableAmount) {
+		this.products.add(new Product(id, name, direction, avilableAmount));
 	}
 	
 }
