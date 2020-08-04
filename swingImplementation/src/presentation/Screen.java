@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import logic.Controller;
+import logic.Product;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -180,6 +181,23 @@ public class Screen extends JFrame {
 		listProducts__menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(masterPanel, "LIST_PRODUCTS__PANEL");
+
+				DefaultTableModel dm = (DefaultTableModel) table.getModel();
+
+				if (con.getProducts().size() > 0) {
+
+					for (Product p : con.getProducts()) {
+						
+						dm.addRow(new Object[] { p.getId(), p.getName(), p.getDirection(), p.getAvilableAmount() });
+						
+					}
+
+				} else {
+
+					JOptionPane.showMessageDialog(null, "There are not products yet.");
+
+				}
+
 			}
 		});
 
@@ -216,17 +234,15 @@ public class Screen extends JFrame {
 					} catch (ClassCastException ex) {
 						System.out.print("It's not possible cast the spinner.");
 					}
-					
-					
+
 					con.saveProduct(id, name, dir, amount);
-					
+
 					JOptionPane.showMessageDialog(null, "Your product it's saved.");
-					
+
 					formInputID__textField.setText("");
 					formInputName__textField.setText("");
 					formInputDir__textField.setText("");
 					formInputAmount__spinner.getModel().setValue(0);
-					
 
 				} catch (Exception exep) {
 					JOptionPane.showMessageDialog(null, exep.getMessage());
@@ -237,13 +253,10 @@ public class Screen extends JFrame {
 
 		formCancel__button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				formInputID__textField.setText("");
 				formInputName__textField.setText("");
 				formInputDir__textField.setText("");
 				formInputAmount__spinner.getModel().setValue(0);
-				
-				
 			}
 		});
 
